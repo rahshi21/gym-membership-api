@@ -50,5 +50,23 @@ public class CustomExceptionHandler {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(BookingNotFoundException.class)
+	public ResponseEntity<Object> handleProductNotFoundException(BookingNotFoundException ex) {
+		
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(DietPlanNotFoundException.class)
+	public ResponseEntity<Object> handleProductNotFoundException(DietPlanNotFoundException ex) {
+		
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(TrainerNotFoundException.class)
+	public ResponseEntity<Object> handleProductNotFoundException(TrainerNotFoundException ex) {
+		
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
 
 }
