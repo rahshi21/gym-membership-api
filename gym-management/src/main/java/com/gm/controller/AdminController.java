@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gm.config.CurrentUserUtil;
 import com.gm.dto.request.AddEquipmentStockRequest;
 import com.gm.dto.request.CreateEquipmentRequest;
 import com.gm.dto.request.CreateMembershipPlanRequest;
@@ -25,6 +26,7 @@ import com.gm.dto.response.EquipmentBookingResponse;
 import com.gm.dto.response.MemberResponse;
 import com.gm.dto.response.MembershipPlanResponse;
 import com.gm.dto.response.TrainerResponse;
+import com.gm.entity.User;
 import com.gm.service.EquipmentBookingService;
 import com.gm.service.EquipmentService;
 import com.gm.service.MemberService;
@@ -37,6 +39,9 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/admin")
 public class AdminController {
 
+	@Autowired
+	private CurrentUserUtil currentUserUtil;
+	
 	@Autowired
 	private MembershipPlanService membershipPlanService;
 
@@ -51,6 +56,12 @@ public class AdminController {
 
 	@Autowired
 	private EquipmentBookingService bookingService;
+	
+	@GetMapping("/home")
+	public String home() {
+		User user = currentUserUtil.getUser();
+		return "Welcome " + user.getUsername();
+	}
 
 	// MEMBERSHIP
 

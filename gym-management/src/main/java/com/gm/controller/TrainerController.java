@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gm.config.CurrentUserUtil;
 import com.gm.dto.request.CreateDietPlanRequest;
 import com.gm.dto.request.CreateTrainerRequest;
 import com.gm.dto.request.UpdateDietPlanRequest;
@@ -19,6 +20,7 @@ import com.gm.dto.request.UpdateTrainerRequest;
 import com.gm.dto.response.DietPlanResponse;
 import com.gm.dto.response.RatingResponse;
 import com.gm.dto.response.TrainerResponse;
+import com.gm.entity.User;
 import com.gm.service.DietPlanService;
 import com.gm.service.RatingService;
 import com.gm.service.TrainerService;
@@ -28,6 +30,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/trainer")
 public class TrainerController {
+	
+	@Autowired
+	private CurrentUserUtil currentUserUtil;
 
     @Autowired
     private TrainerService trainerService;
@@ -37,6 +42,12 @@ public class TrainerController {
     
     @Autowired
 	private RatingService ratingService;
+    
+    @GetMapping("/home")
+	public String home() {
+		User user = currentUserUtil.getUser();
+		return "Welcome " + user.getUsername();
+	}
 
     //PROFILE
     
